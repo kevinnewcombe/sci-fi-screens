@@ -14,7 +14,8 @@ const colors = {
   'green' : '#0a9164',
   'offwhite': '#eee',
   'yellow': '#FFF200',
-  'red'   : '#FF4400'
+  'red'   : '#FF4400',
+  'darkgrey' : '#222'
 }
 let runCount = 0;
 
@@ -151,11 +152,11 @@ const drawTextScreen = (specs) => {
   const {x,y,width} = specs;
   createElement('rect', {
     ...specs,
-    rx: 10,
+    rx: 5,
     fill: colors.green,
   });
   
-  let screenWidth = specs.width - 20;
+  let screenWidth = width - 20;
   let remainingColumnWidth = screenWidth;
   const columnWidths = [];
   while(remainingColumnWidth > 10){
@@ -189,6 +190,26 @@ const drawTextScreen = (specs) => {
   }
 }
 
+const drawLevels = (specs) => {
+  // Something like volume meters, where it's a collection of columns that go from green to yellow to red
+  const {x,y,width,height} = specs;
+  createElement('rect', {
+    ...specs,
+    rx: 5,
+    fill: colors.darkgrey,
+  });
+
+  createElement('rect', {
+    x: x+15,
+    y: y+15,
+    width: width - 30,
+    height: height - 30,
+    fill: 'url(#Gradient2)',
+  });
+
+
+}
+
 /**
  * Draw the grid
  */
@@ -214,12 +235,14 @@ const fillArea = (specs) =>{
     // drawDial(specs);
     drawMeter(specs);
   }else if(specs.width >= 40 && specs.width == specs.height && runCount < 1){
-    switch(randomNumber(0,2)){
+    switch(randomNumber(0,3)){
       case 0:
         drawTextScreen(specs);
         break;
       case 1:
         drawRadar(specs);
+      case 2:
+        drawLevels(specs)
       break;
     }
   }
