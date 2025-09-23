@@ -168,17 +168,18 @@ const drawTextScreen = (specs) => {
   let z = 0;
   for(let i=0; i<columnWidths.length; i++){
 
-    let currentY = y + 20;
-
+    let currentY = y + 17;
+    const cellType = randomNumber(0, 1);
     while(currentY < y + height - 15){
       let str = '';
-      const cellType = randomNumber(0, 1);
-      for(let j=0; j<randomNumber(Math.floor(columnWidths[i] / 5.5) - 1, Math.floor(columnWidths[i] / 5.5)); j++){
+ 
+      for(let j=0; j<randomNumber(Math.max(1, Math.floor(columnWidths[i] / 5.5) - 3), Math.floor(columnWidths[i] / 5.5)); j++){
         str += (cellType === 0) ? randomChar() : randomNumber(0,9);
       }
       createElement('text', {
         x: currentX,
         y: currentY
+        
       }, str);
 
       // console.log(currentX, currentY);
@@ -186,33 +187,6 @@ const drawTextScreen = (specs) => {
     }
     currentX += columnWidths[i]+5;
   }
-  // // const lineHeight = width * 0.05;
-
-  // // let lineY = y + width * 0.15;
-  // // while(lineY < y + width * .9){
-  // //   dashArray = '';
-  // //   let p = 0;
-  // //   while(p <= 14){
-  // //     const l = randomNumber(2,6);
-  // //     p+=l;
-  // //     if(p <= 14){
-  // //       dashArray+= `${lineHeight * l} ${lineHeight} `;
-  // //     }else{
-  // //       dashArray+= `0 15`;
-  // //     }
-  // //   }
-
-  // //   createElement('line', {
-  // //     x1: x + width * 0.15,
-  // //     x2: x + width * 0.85,
-  // //     y1: lineY,
-  // //     y2: lineY,
-  // //     'stroke-width' : lineHeight,
-  // //     stroke: '#fff',
-  // //     "stroke-dasharray": dashArray
-  // //   });
-  // //   lineY+= lineHeight * 2;
-  // }
 }
 
 /**
