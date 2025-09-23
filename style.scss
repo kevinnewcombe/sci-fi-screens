@@ -1,16 +1,39 @@
 body{
-  padding: 20px;
   margin:0;
   min-height: 100vh;
-  font-family: sans-serif;
+  font-family: "Roboto", sans-serif;
   font-optical-sizing: auto;
   font-style: normal;
   line-height: 1.5;
   font-size: 16px;
   align-content: center;
   text-align: center;
+  background: #ccc;
 }
 
 *, *::before, *::after {
   box-sizing: border-box;
+}
+
+svg{
+  width: 100vmin;
+  background: #fff;
+  // width: 1000px;
+}
+
+.radar__bg{
+  fill: #333;
+}
+
+.radar__sweep > div{
+  border-radius: 100%;
+  background-image: conic-gradient(from var(--rotation), #333 330deg, #00bb03 355deg, #00bb03 357deg);
+}
+
+.dial > div{
+  background: pink;
+}
+
+.radar__stroke{
+  fill: #009703;
 }
