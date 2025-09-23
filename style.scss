@@ -8,7 +8,6 @@ body{
   font-size: 16px;
   align-content: center;
   text-align: center;
-  background: #ccc;
 }
 
 *, *::before, *::after {
@@ -16,9 +15,9 @@ body{
 }
 
 svg{
-  width: 100vmin;
+  width: min(1000px, 100%);
+  aspect-ratio: 1 / 1;
   background: #fff;
-  // width: 1000px;
 }
 
 .radar__bg{
@@ -27,7 +26,7 @@ svg{
 
 .radar__sweep > div{
   border-radius: 100%;
-  background-image: conic-gradient(from var(--rotation), #333 330deg, #00bb03 355deg, #00bb03 357deg);
+  background-image: conic-gradient(from var(--rotation), #333 330deg, #00bb03 355deg, #00bb03 357deg, #333 360deg);
 }
 
 .dial > div{
