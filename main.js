@@ -6,10 +6,10 @@ import {
   createElement,
   createForeignObject,
 } from "./partials/shared/shared";
-import drawDial from "./partials/elements/drawDial";
+import drawButtonPanel from "./partials/elements/drawButtonPanel";
 import drawRadar from "./partials/elements/drawRadar";
 import drawTextScreen from "./partials/elements/drawTextScreen";
-import drawMeter from "./partials/elements/drawMeter";
+// import drawMeter from "./partials/elements/drawMeter";
 import drawLevels from "./partials/elements/drawLevels";
 const stageWidth = 1000;
 const stageHeight = 1000;
@@ -49,8 +49,8 @@ for (let columnIndex = 0; columnIndex < columnSizes.length - 1; columnIndex++) {
       "stroke-width": "0.5",
     });
 
-    if (specs.width <= 40 || specs.height < 40) {
-      drawDial(specs);
+    if (specs.width <= 40 || specs.height <= 40) {
+      drawButtonPanel(specs);
       // drawMeter(specs);
     } else if (specs.width >= 40 && specs.width == specs.height) {
       switch (randomNumber(0, 3)) {
@@ -63,7 +63,13 @@ for (let columnIndex = 0; columnIndex < columnSizes.length - 1; columnIndex++) {
           drawLevels(specs);
           break;
       }
+    }else{
+
     }
+    createElement('text', {
+      x: specs.x+2,
+      y: specs.y+10,
+    }, `w:${specs.width}|h:${specs.height}`)
     // fillArea();
   }
 }
