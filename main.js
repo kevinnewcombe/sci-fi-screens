@@ -1,14 +1,12 @@
 import {
   randomItem,
-  randomChar,
   randomNumber,
-  colors,
   createElement,
-  createForeignObject,
 } from "./partials/shared/shared";
 import drawButtonPanel from "./partials/elements/drawButtonPanel";
 import drawRadar from "./partials/elements/drawRadar";
 import drawTextScreen from "./partials/elements/drawTextScreen";
+import drawRadarChart from "./partials/elements/drawRadarChart";
 // import drawMeter from "./partials/elements/drawMeter";
 import drawLevels from "./partials/elements/drawLevels";
 const stageWidth = 1000;
@@ -49,10 +47,11 @@ for (let columnIndex = 0; columnIndex < columnSizes.length - 1; columnIndex++) {
       "stroke-width": "0.5",
     });
 
-    if (specs.width <= 40 || specs.height <= 40) {
+    if ( specs.height <= 10 || specs.width <= 10) {
       drawButtonPanel(specs);
       // drawMeter(specs);
-    } else if (specs.width >= 40 && specs.width == specs.height) {
+    }else if (specs.width >= 40 && specs.width == specs.height) {
+      //  drawRadarChart(specs);
       switch (randomNumber(0, 3)) {
         case 0:
           drawTextScreen(specs);
@@ -62,14 +61,20 @@ for (let columnIndex = 0; columnIndex < columnSizes.length - 1; columnIndex++) {
         case 2:
           drawLevels(specs);
           break;
+        case 3:
+          drawRadarChart(specs);
+          break;
       }
-    }else{
-
+    }else if(specs.width / specs.height > 1){
+      drawLevels(specs);
+    } else{
+      
+      createElement('text', {
+        x: specs.x+2,
+        y: specs.y+10,
+      }, `w:${specs.width}|h:${specs.height}`)
     }
-    createElement('text', {
-      x: specs.x+2,
-      y: specs.y+10,
-    }, `w:${specs.width}|h:${specs.height}`)
+
     // fillArea();
   }
 }
