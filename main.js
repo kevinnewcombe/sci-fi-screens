@@ -212,18 +212,58 @@ const drawLevels = (specs) => {
     id: maskID
   });
   
+  const padding = 15;
   const maskSpecs = {
-    x: x+10,
-    y: y+10,
-    width: width - 20,
-    height: height - 20
+    x: x+padding,
+    y: y+padding,
+    width: width - padding*2,
+    height: height - padding*2
   }
+  const gridOffset = 2;
+  const legendColor = '#aaa';
+  const gridLines = randomItem([4,5,10]);
+  for(let i=0; i<gridLines; i++){
+    lineY = maskSpecs.y+(maskSpecs.height+gridOffset) * (i+1)/gridLines;
+    createElement('line', {
+      x1: maskSpecs.x-gridOffset,
+      x2: (i === (gridLines - 1)) ? maskSpecs.x+maskSpecs.width : maskSpecs.x-gridOffset - 3,
+      y1: lineY,
+      y2: lineY,
+      'stroke-width' : 1,
+      'vector-effect' : 'non-scaling-stroke',
+      stroke: (i === (gridLines - 1)) ? legendColor : '#999'
+    });
+
+  }
+
+  // Draw the graph lines
+  createElement('line', {
+    x1: maskSpecs.x-gridOffset,
+    x2: maskSpecs.x-gridOffset,
+    y1: maskSpecs.y,
+    y2: maskSpecs.y+maskSpecs.height+gridOffset,
+    'stroke-width' : 1,
+    'vector-effect' : 'non-scaling-stroke',
+    stroke: legendColor
+  });
+
+  // createElement('line', {
+  //   x1: maskSpecs.x-gridOffset,
+  //   x2: maskSpecs.x+maskSpecs.width,
+  //   y1: maskSpecs.y+maskSpecs.height+gridOffset,
+  //   y2: maskSpecs.y+maskSpecs.height+gridOffset,
+  //   'stroke-width' : 1,
+  //   'vector-effect' : 'non-scaling-stroke',
+  //   stroke: legendColor
+  // });
+
 
   // Draw the individual blocks for the levels mask
   const numberOfBars = randomNumber(4,8);
-  const barSpacing = maskSpecs.width / 20;
+  const barSpacing = 3;
   const barWidth = (maskSpecs.width - (barSpacing * (numberOfBars - 1))) / numberOfBars;
-
+  console.log(barWidth);
+  const numberOfChars = Math.floor(barWidth / 7);
   for(let i=0; i<numberOfBars; i++){
     createElement('rect', {
       x: maskSpecs.x + (barWidth+barSpacing)*i,
@@ -233,15 +273,18 @@ const drawLevels = (specs) => {
       width: barWidth,
       height: maskSpecs.height,
     }, null, mask);
+
+    let str = '';
+    for(let j=0; j<numberOfChars; j++){
+      str+= randomChar();
+    }
+    createElement('text', {
+      x: maskSpecs.x + (barWidth+barSpacing)*i + barWidth / 2,
+      y: maskSpecs.y + maskSpecs.height + 12,        
+      'text-anchor' : 'middle'
+    },`${str}`);
   }
-  // createElement('rect', {
-  //   x: maskSpecs.x,
-  //   y: maskSpecs.y,
-  //   // y: maskSpecs.y + maskSpecs.height / 5,
-  //   fill: '#fff',
-  //   width: maskSpecs.width,
-  //   height: maskSpecs.height,
-  // }, null, mask);
+
 
 
   // Draw the mask
@@ -298,27 +341,27 @@ const fillArea = (specs) =>{
 for(let columnIndex=0; columnIndex<columnSizes.length - 1; columnIndex++){
   x = columnSizes[columnIndex];
   width = columnSizes[columnIndex+1] - x;
-  createElement('line', {
-    x1: x,
-    x2: x,
-    y1: 0,
-    y2: stageHeight,
-    'stroke-width' : 1,
-    'vector-effect' : 'non-scaling-stroke',
-    stroke: '#ccc'
-  });
+  // createElement('line', {
+  //   x1: x,
+  //   x2: x,
+  //   y1: 0,
+  //   y2: stageHeight,
+  //   'stroke-width' : 1,
+  //   'vector-effect' : 'non-scaling-stroke',
+  //   stroke: '#ccc'
+  // });
   for(let rowIndex=0; rowIndex<rowSizes.length - 1; rowIndex++){
     y = rowSizes[rowIndex];
     height = rowSizes[rowIndex+1] - y;
-    createElement('line', {
-      x1: 0,
-      x2: stageWidth,
-      y1: y,
-      y2: y,
-      'stroke-width' : 1,
-      'vector-effect' : 'non-scaling-stroke',
-      stroke: '#ccc'
-    });
+    // createElement('line', {
+    //   x1: 0,
+    //   x2: stageWidth,
+    //   y1: y,
+    //   y2: y,
+    //   'stroke-width' : 1,
+    //   'vector-effect' : 'non-scaling-stroke',
+    //   stroke: '#ccc'
+    // });
   
     fillArea({
       x: x + gridPadding,
