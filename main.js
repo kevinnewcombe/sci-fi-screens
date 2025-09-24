@@ -1,18 +1,20 @@
 import {
   randomItem,
-  randomNumber,
+  randomInteger,
   createElement,
 } from "./partials/shared/shared";
 import drawButtonPanel from "./partials/elements/drawButtonPanel";
 import drawRadar from "./partials/elements/drawRadar";
 import drawTextScreen from "./partials/elements/drawTextScreen";
+import drawOscilloscope from './partials/elements/drawOscilloscope';
 import drawRadarChart from "./partials/elements/drawRadarChart";
 // import drawMeter from "./partials/elements/drawMeter";
 import drawLevels from "./partials/elements/drawLevels";
 const stageWidth = 1000;
 const stageHeight = 1000;
 const gridPadding = 5;
-const sizes = [20, 40, 80, 160];
+// const sizes = [20, 40, 80, 160];
+const sizes = [30, 50, 90, 170, 210];
 
 // Create the grid lines
 let columnSizes = [0];
@@ -46,13 +48,17 @@ for (let columnIndex = 0; columnIndex < columnSizes.length - 1; columnIndex++) {
       stroke: "#ccc",
       "stroke-width": "0.5",
     });
+    
+    // Available sizes: 20, 40, 80, 160, 200
 
-    if ( specs.height <= 10 || specs.width <= 10) {
+    if ( specs.height <= 20 || specs.width <= 20) {
       drawButtonPanel(specs);
       // drawMeter(specs);
+    }else if(specs.width / specs.height >= 2){
+      drawOscilloscope(specs);
     }else if (specs.width >= 40 && specs.width == specs.height) {
-      //  drawRadarChart(specs);
-      switch (randomNumber(0, 3)) {
+      // drawOscilloscope(specs);
+      switch (randomInteger(0, 4)) {
         case 0:
           drawTextScreen(specs);
           break;
@@ -66,15 +72,21 @@ for (let columnIndex = 0; columnIndex < columnSizes.length - 1; columnIndex++) {
           break;
       }
     }else if(specs.width / specs.height > 1){
-      drawLevels(specs);
+      // drawLevels(specs);
     } else{
       
-      createElement('text', {
-        x: specs.x+2,
-        y: specs.y+10,
-      }, `w:${specs.width}|h:${specs.height}`)
-    }
 
+    }
+      createElement(
+        "text",
+        {
+          x: specs.x + 2,
+          y: specs.y + 10,
+        },
+        `w:${specs.width}|h:${specs.height}`
+      );
     // fillArea();
   }
+
+  
 }

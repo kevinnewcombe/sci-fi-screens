@@ -1,4 +1,4 @@
-import { createElement, colors, randomItem, randomNumber, randomChar } from "../shared/shared";
+import { createElement, colors, randomItem, randomInteger, randomChar } from "../shared/shared";
 const drawLevels = (specs) => {
   // Something like volume meters, where it's a collection of columns that go from green to yellow to red
   const { x, y, width, height } = specs;
@@ -53,7 +53,7 @@ const drawLevels = (specs) => {
   });
 
   // Draw the individual blocks for the levels mask
-  const numberOfBars = randomNumber(4, 8);
+  const numberOfBars = randomInteger(4, 8);
   const barSpacing = 3;
   const barWidth =
     (maskSpecs.width - barSpacing * (numberOfBars - 1)) / numberOfBars;
@@ -64,7 +64,7 @@ const drawLevels = (specs) => {
       {
         x: maskSpecs.x + (barWidth + barSpacing) * i,
         y: maskSpecs.y,
-        y: maskSpecs.y + maskSpecs.height / (randomNumber(100, 11) / 10),
+        y: maskSpecs.y + maskSpecs.height / (randomInteger(100, 11) / 10),
         fill: "#fff",
         width: barWidth,
         height: maskSpecs.height,

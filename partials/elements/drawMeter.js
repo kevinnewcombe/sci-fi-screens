@@ -1,4 +1,4 @@
-import { createElement, getPointOnCircle, randomNumber } from "../shared/shared"
+import { createElement, getPointOnCircle, randomInteger } from "../shared/shared"
 const drawMeter = (specs) =>{
   const {x,y,width, height} = specs;
 
@@ -32,7 +32,7 @@ const drawMeter = (specs) =>{
     angle+= incremenets;
   }
   
-  angle = randomNumber(0, 360);
+  angle = randomInteger(0, 360);
   const p2 = getPointOnCircle(angle, {x: cx,y: cy}, r-2);
   createElement('line', {
     x1: cx,

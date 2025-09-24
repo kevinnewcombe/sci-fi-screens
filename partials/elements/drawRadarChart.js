@@ -1,4 +1,4 @@
-import { randomChar, createElement, colors, randomNumber, getPointOnCircle } from "../shared/shared";
+import { randomChar, createElement, colors, randomInteger, getPointOnCircle } from "../shared/shared";
 const drawRadarChart = (specs) => {
   // createElement("rect", {
   //   ...specs,
@@ -25,9 +25,10 @@ const drawRadarChart = (specs) => {
   let firstLine = ''; 
   const center = {x: x+width/2, y: y+height/2};
   const crossPoints = [0.3, 0.6, 0.9];
-  for(let i=0; i<5; i++){
+  const pointCount = 6;
+  for(let i=0; i<pointCount; i++){
     const r = Math.min(width, height) / 2 ;
-    const q = 360/5*i-90;
+    const q = 360/pointCount*i-90;
     const s = getPointOnCircle(q, center, r*0.9)
 
     for(let j = 0; j<lines.length; j++){
@@ -47,13 +48,13 @@ const drawRadarChart = (specs) => {
     }
     crossPoints.forEach((cp) =>{
       const crossStart = getPointOnCircle(q, center, r*cp);
-      const crossEnd = getPointOnCircle( 360/5*(i+1)-90, center, r*cp);
+      const crossEnd = getPointOnCircle( 360/pointCount*(i+1)-90, center, r*cp);
       createElement("line", {
         x1: crossStart.x,
         y1: crossStart.y,
         x2: crossEnd.x,
         y2: crossEnd.y,
-        'stroke': '#555',
+        'stroke': '#333',
         'stroke-width' : '1',
       });
     })
@@ -66,7 +67,7 @@ const drawRadarChart = (specs) => {
       y1: center.y,
       x2: s.x,
       y2: s.y,
-      'stroke': '#555',
+      'stroke': '#333',
       'stroke-width' : '1',
     });
 
@@ -76,8 +77,8 @@ const drawRadarChart = (specs) => {
     createElement("path", {
       d: `${lines[j].d} Z`,
       stroke: `rgba(${lines[j].rgb}, 1)`,
-      fill: `rgba(${lines[j].rgb}, 0.25)`,
-      // 'fill' : 'transparent',
+      // fill: `rgba(${lines[j].rgb}, 0.25)`,
+      'fill' : 'transparent',
       'stroke-width' : '1',
     });
   }

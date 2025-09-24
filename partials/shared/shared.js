@@ -7,11 +7,15 @@ export const randomItem = (arr) => {
 }
 
 export const randomNumber = (min, max) => {
-  return  min + Math.round(Math.random() * (max - min));
+  return  min + Math.random() * (max - min);
+}
+
+export const randomInteger = (min, max) => {
+  return Math.round(randomNumber(min, max));
 }
 
 export const randomChar = () =>{
-  return String.fromCharCode(randomNumber(65, 90));
+  return String.fromCharCode(randomInteger(65, 90));
 }
 
 export const colors = {

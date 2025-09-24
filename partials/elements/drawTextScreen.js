@@ -1,4 +1,4 @@
-import { randomChar, createElement, colors, randomNumber } from "../shared/shared";
+import { randomChar, createElement, colors, randomInteger } from "../shared/shared";
 const drawTextScreen = (specs) => {
   // console.log('drawTextScreen', specs);
   const {x,y,width,height} = specs;
@@ -12,7 +12,7 @@ const drawTextScreen = (specs) => {
   let remainingColumnWidth = screenWidth;
   const columnWidths = [];
   while(remainingColumnWidth > 10){
-    const w = randomNumber(10, Math.min(remainingColumnWidth, screenWidth / 3) );
+    const w = randomInteger(10, Math.min(remainingColumnWidth, screenWidth / 3) );
     remainingColumnWidth = remainingColumnWidth - w - 5;
     columnWidths.push(w);
   }
@@ -22,12 +22,12 @@ const drawTextScreen = (specs) => {
   for(let i=0; i<columnWidths.length; i++){
 
     let currentY = y + 17;
-    const cellType = randomNumber(0, 1);
+    const cellType = randomInteger(0, 1);
     while(currentY < y + height - 15){
       let str = '';
  
-      for(let j=0; j<randomNumber(Math.max(1, Math.floor(columnWidths[i] / 5.5) - 3), Math.floor(columnWidths[i] / 5.5)); j++){
-        str += (cellType === 0) ? randomChar() : randomNumber(0,9);
+      for(let j=0; j<randomInteger(Math.max(1, Math.floor(columnWidths[i] / 5.5) - 3), Math.floor(columnWidths[i] / 5.5)); j++){
+        str += (cellType === 0) ? randomChar() : randomInteger(0,9);
       }
       createElement('text', {
         x: currentX,

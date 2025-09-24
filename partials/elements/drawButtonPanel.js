@@ -1,4 +1,4 @@
-import { randomItem, randomNumber, colors, createElement } from "../shared/shared";
+import { randomItem, randomInteger, colors, createElement } from "../shared/shared";
 
 const drawButtonPanel = (specs) => {
   const {x,y,width,height} = specs;
@@ -11,7 +11,7 @@ const drawButtonPanel = (specs) => {
         width:8,
         height:8,
         rx: 2,
-        fill: `color-mix(in lab, ${randomItem([colors.green, colors.orange, colors.yellow, '#fff', colors.red])}, ${colors.darkgrey} ${randomNumber(20, 20)}%)`,
+        fill: `color-mix(in lab, ${randomItem([colors.green, colors.orange, colors.yellow, '#fff', colors.red])}, ${colors.darkgrey} ${randomInteger(20, 20)}%)`,
       });
     }
   }
