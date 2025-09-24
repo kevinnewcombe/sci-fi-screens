@@ -46,7 +46,7 @@ const getPointOnCircle = (angle, center, radius)=>{
   };
 }
 
-const createElement = (name, attrs, textContent = null) =>{
+const createElement = (name, attrs, textContent = null, parent = null) =>{
   const el = document.createElementNS(svgns, name);
   for(const [key, value] of Object.entries(attrs)){
     el.setAttribute(key, value);
@@ -54,7 +54,14 @@ const createElement = (name, attrs, textContent = null) =>{
   if(textContent){
     el.textContent = textContent;
   }
-  stage.appendChild(el);
+
+  if(parent !== null){
+    // console.log('parent', parent);
+    parent.appendChild(el);
+  }else{
+    stage.appendChild(el);
+  }
+  return el;
 }
 const randomChar = () =>{
   return String.fromCharCode(randomNumber(65, 90));
@@ -198,14 +205,52 @@ const drawLevels = (specs) => {
     rx: 5,
     fill: colors.darkgrey,
   });
+  
+  const maskID = `mask-levels-x${x}y${y}`;
 
+  const mask = createElement('mask', {
+    id: maskID
+  });
+  
+  const maskSpecs = {
+    x: x+10,
+    y: y+10,
+    width: width - 20,
+    height: height - 20
+  }
+
+  // Draw the individual blocks for the levels mask
+  const numberOfBars = randomNumber(4,8);
+  const barSpacing = maskSpecs.width / 20;
+  const barWidth = (maskSpecs.width - (barSpacing * (numberOfBars - 1))) / numberOfBars;
+
+  for(let i=0; i<numberOfBars; i++){
+    createElement('rect', {
+      x: maskSpecs.x + (barWidth+barSpacing)*i,
+      y: maskSpecs.y,
+      y: maskSpecs.y + maskSpecs.height / (randomNumber(100, 11) / 10),
+      fill: '#fff',
+      width: barWidth,
+      height: maskSpecs.height,
+    }, null, mask);
+  }
+  // createElement('rect', {
+  //   x: maskSpecs.x,
+  //   y: maskSpecs.y,
+  //   // y: maskSpecs.y + maskSpecs.height / 5,
+  //   fill: '#fff',
+  //   width: maskSpecs.width,
+  //   height: maskSpecs.height,
+  // }, null, mask);
+
+
+  // Draw the mask
   createElement('rect', {
-    x: x+15,
-    y: y+15,
-    width: width - 30,
-    height: height - 30,
+    ...maskSpecs,
+    mask: `url(#${maskID})`,
     fill: 'url(#Gradient2)',
   });
+
 
 
 }
