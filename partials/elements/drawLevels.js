@@ -1,7 +1,12 @@
 import { createElement, colors, randomItem, randomInteger, randomChar } from "../shared/shared";
+import addRandomPanel from '../shared/panels'; 
 const drawLevels = (specs) => {
-  // Something like volume meters, where it's a collection of columns that go from green to yellow to red
+  console.log('specs', specs);
   const { x, y, width, height } = specs;
+  if(width <= 30 || height <= 30 || width / height < 0.8){
+    addRandomPanel(specs);
+    return;
+  }
   createElement("rect", {
     ...specs,
     rx: 5,
@@ -51,7 +56,6 @@ const drawLevels = (specs) => {
     "vector-effect": "non-scaling-stroke",
     stroke: legendColor,
   });
-
   // Draw the individual blocks for the levels mask
   const numberOfBars = randomInteger(4, 8);
   const barSpacing = 3;

@@ -14,7 +14,7 @@ const drawRadar = (specs) =>{
       cy: y + width / 2 + c.y,
       r: width * 0.04,
       fill: colors.green,
-      filter: 'url(#blur-0point5)'
+      // filter: 'url(#blur-0point5)'
     });  
   }
   

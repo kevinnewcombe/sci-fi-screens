@@ -23,7 +23,7 @@ const drawTextScreen = (specs) => {
 
     let currentY = y + 17;
     const cellType = randomInteger(0, 1);
-    while(currentY < y + height - 15){
+    while(currentY < y + height ){
       let str = '';
  
       for(let j=0; j<randomInteger(Math.max(1, Math.floor(columnWidths[i] / 5.5) - 3), Math.floor(columnWidths[i] / 5.5)); j++){

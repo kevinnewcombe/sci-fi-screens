@@ -4,7 +4,7 @@ const drawOscilloscope = (specs) =>{
   const {x,y,width, height} = specs;
   const centerY = y+height/2;
   const numberOfArcs = randomInteger(2, 10);
-  const arcHeight= height * randomNumber(0.1, 0.3);
+  const arcHeight= height * randomNumber(0.1, 0.9);
   const arcWidth = width / numberOfArcs;
 
   
@@ -18,6 +18,16 @@ const drawOscilloscope = (specs) =>{
     ...specs,
     rx: 5,
     fill: colors.darkgrey,
+  });
+  
+  createElement('line', {
+    x1: x,
+    x2: x+width,
+    y1: centerY,
+    y2: centerY,
+    'stroke': '#ccc',
+    'stroke-dasharray': '6, 3',
+    'stroke-width' : '1',
   });
   createElement("path", {
     d,
