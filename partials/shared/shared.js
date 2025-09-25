@@ -23,7 +23,9 @@ export const colors = {
   'green' : '#0a9164',
   'offwhite': '#eee',
   'yellow': '#FFF200',
+  'yellowalt' : '#ffdf08',
   'orange' : '#ff8630',
+  'orangealt' : '#f57525',
   'red'   : '#FF4400',
   'darkgrey' : '#222'
 }

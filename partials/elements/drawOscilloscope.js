@@ -1,7 +1,13 @@
 import { createElement, colors, randomInteger, randomNumber } from "../shared/shared"
+import addRandomPanel from '../shared/panels'; 
+
 const drawOscilloscope = (specs) =>{
-  
   const {x,y,width, height} = specs;
+  if(height > width || width <= 30){
+    addRandomPanel(specs);
+    return false;  
+  }
+
   const centerY = y+height/2;
   const numberOfArcs = randomInteger(2, 10);
   const arcHeight= height * randomNumber(0.1, 0.9);

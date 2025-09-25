@@ -1,7 +1,11 @@
 import { createElement, getPointOnCircle, randomInteger } from "../shared/shared"
+import addRandomPanel from "../shared/panels";
 const drawMeter = (specs) =>{
   const {x,y,width, height} = specs;
-
+  if(width !== height){
+    addRandomPanel(specs);
+    return;
+  }
   const cx = x + width / 2;
   const cy = y + height / 2;
   const r = width / 2

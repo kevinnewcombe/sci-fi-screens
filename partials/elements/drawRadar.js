@@ -1,6 +1,11 @@
 import { createForeignObject, randomInteger, getRandomCoordinateInCircle, createElement, colors } from "../shared/shared";
+import addRandomPanel from '../shared/panels'; 
 const drawRadar = (specs) =>{
   const {x,y,width,height} = specs;
+  if(height !== width){
+    addRandomPanel(specs);
+    return false;  
+  }
   createForeignObject({
     ...specs,
     style: `--rotation:45deg`,

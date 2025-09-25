@@ -1,11 +1,15 @@
 import { randomChar, createElement, colors, randomInteger } from "../shared/shared";
+import addRandomPanel from '../shared/panels'; 
 const drawTextScreen = (specs) => {
-  // console.log('drawTextScreen', specs);
   const {x,y,width,height} = specs;
+  if(width <= 30 || height <= 30){
+    addRandomPanel(specs);
+    return false;  
+  }
   createElement('rect', {
     ...specs,
     rx: 5,
-    fill: colors.green,
+    fill: colors.darkgrey,
   });
   
   let screenWidth = width - 20;
@@ -31,8 +35,8 @@ const drawTextScreen = (specs) => {
       }
       createElement('text', {
         x: currentX,
-        y: currentY
-        
+        y: currentY,
+        style: `fill:${colors.green}; font-size:8;`,
       }, str);
 
       currentY += 12;

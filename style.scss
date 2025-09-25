@@ -18,7 +18,7 @@ body{
 svg{
   width: min(1000px, 100%);
   aspect-ratio: 1 / 1;
-  // background: #fff;
+  // background: red;
 }
 
 .radar__bg{
@@ -27,7 +27,7 @@ svg{
 
 .radar__sweep > div{
   border-radius: 100%;
-  background-image: conic-gradient(from var(--rotation), #333 330deg, #00bb03 355deg, #00bb03 357deg, #333 360deg);
+  background-image: conic-gradient(from var(--rotation), #333 330deg, #0a9164 355deg, #0a9164 357deg, #333 360deg);
 }
 
 .dial > div{
@@ -35,5 +35,5 @@ svg{
 }
 
 .radar__stroke{
-  fill: #009703;
+  fill: #888;
 }

@@ -1,11 +1,11 @@
 import { randomChar, createElement, colors, randomInteger, getPointOnCircle } from "../shared/shared";
+import addRandomPanel from '../shared/panels'; 
 const drawRadarChart = (specs) => {
-  // createElement("rect", {
-  //   ...specs,
-  //   fill: 'green'
-  // });
-
   const {x,y,width,height} = specs;
+  if(height !== width){
+    addRandomPanel(specs);
+    return false;  
+  }
   
   let d = '';
   const lines = [
@@ -16,11 +16,7 @@ const drawRadarChart = (specs) => {
     {
       rgb: '255,0,255',
       d: ''
-    },
-    // {
-    //   rgb: '255,255,0',
-    //   d: ''
-    // }
+    }
   ]
   let firstLine = ''; 
   const center = {x: x+width/2, y: y+height/2};
@@ -32,7 +28,7 @@ const drawRadarChart = (specs) => {
     const s = getPointOnCircle(q, center, r*0.9)
 
     for(let j = 0; j<lines.length; j++){
-      const p = getPointOnCircle(q, center, r*(Math.max(0.1, Math.random()-0.1)));
+      const p = getPointOnCircle(q, center, r*(Math.max(0.2, Math.random()-0.2)));
       createElement('circle', {
         cx: p.x,
         cy: p.y,
@@ -77,8 +73,8 @@ const drawRadarChart = (specs) => {
     createElement("path", {
       d: `${lines[j].d} Z`,
       stroke: `rgba(${lines[j].rgb}, 1)`,
-      // fill: `rgba(${lines[j].rgb}, 0.25)`,
-      'fill' : 'transparent',
+      fill: `rgba(${lines[j].rgb}, 0.1)`,
+      // 'fill' : 'transparent',
       'stroke-width' : '1',
     });
   }

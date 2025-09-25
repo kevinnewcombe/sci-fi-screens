@@ -1,11 +1,12 @@
 import { randomItem, randomInteger, colors, createElement } from "../shared/shared";
 import addRandomPanel from "../shared/panels";
 const drawButtonPanel = (specs) => {
-  // addRandomPanel(specs);
-  // return;
-
   const {x,y,width,height} = specs;
-  const color = randomItem([colors.green, colors.orange, colors.yellow, colors.red]);
+  if(width * height > 10000){
+    addRandomPanel(specs);
+    return false;  
+  }
+  const color = randomItem([colors.green, '#fff', colors.orange, colors.yellow, colors.red]);
   for(let dialX = x; dialX<x+width; dialX+=10){
     for(let dialY = y; dialY<y+height; dialY+=10){
       createElement('rect', {
@@ -14,7 +15,7 @@ const drawButtonPanel = (specs) => {
         width:8,
         height:8,
         rx: 2,
-        fill: `color-mix(in lab, ${color}, ${colors.darkgrey} ${randomInteger(25, 75)}%)`,
+        fill: `color-mix(in lab, ${color}, ${colors.darkgrey} ${randomInteger(25, 50)}%)`,
       });
     }
   }

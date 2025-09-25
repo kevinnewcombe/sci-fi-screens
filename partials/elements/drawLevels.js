@@ -1,9 +1,8 @@
 import { createElement, colors, randomItem, randomInteger, randomChar } from "../shared/shared";
 import addRandomPanel from '../shared/panels'; 
 const drawLevels = (specs) => {
-  console.log('specs', specs);
   const { x, y, width, height } = specs;
-  if(width <= 30 || height <= 30 || width / height < 0.8){
+  if(width <= 30 || height <= 30 || width / height < 0.6){
     addRandomPanel(specs);
     return;
   }
@@ -71,6 +70,7 @@ const drawLevels = (specs) => {
         y: maskSpecs.y + maskSpecs.height / (randomInteger(100, 11) / 10),
         fill: "#fff",
         width: barWidth,
+        filter: 'url(#blur-0point5)',
         height: maskSpecs.height,
       },
       null,
